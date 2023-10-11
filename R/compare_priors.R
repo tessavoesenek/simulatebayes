@@ -9,22 +9,23 @@
 
 
 compare_priors <- function(coefficients_priortype_1, coefficients_priortype_0, Effect){
+  DiD_estimates <- c("DiD_9", "DiD_10", "DiD_11","DiD_12")
   # prior 1 = non informative
   # prior 0 = informative
   RR <- coefficients_priortype_1 %>%
-    group_by(Kwartaal) %>%
+    group_by(rowname) %>%
     summarise(ME = mean(Estimate), ML = mean(Q2.5), MU = mean(Q97.5)) %>%
     dplyr::ungroup() %>%
     mutate(Prior = "non informative")
 
   RR2 <- coefficients_priortype_0 %>%
-    group_by(Kwartaal) %>%
+    group_by(rowname) %>%
     summarise(ME = mean(Estimate), ML = mean(Q2.5), MU = mean(Q97.5)) %>%
     dplyr::ungroup() %>%
     mutate(Prior = "informative")
 
   RR3 <- rbind(RR, RR2) %>%
-    filter(!is.na(Kwartaal))
+    filter(rowname %in% DiD_estimates)
 
 
     p1 <- ggplot2::ggplot(data = RR3,
@@ -35,7 +36,7 @@ compare_priors <- function(coefficients_priortype_1, coefficients_priortype_0, E
       ggplot2::aes(x = ME,
                    y = Prior),
       size = 2) +
-    ggplot2::facet_wrap(~factor(Kwartaal)) +
+    ggplot2::facet_wrap(~factor(rowname)) +
     ggplot2::geom_vline(xintercept = 0,
                         color = "firebrick",
                         linetype = "dashed") +
