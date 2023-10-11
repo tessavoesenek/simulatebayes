@@ -4,7 +4,7 @@
 \alias{plot_samples}
 \title{Plot sample distribution}
 \usage{
-plot_samples(samples, Grens, Effect)
+plot_samples(samples, Grens = 0, Effect)
 }
 \arguments{
 \item{samples}{dataframe with posterior samples}

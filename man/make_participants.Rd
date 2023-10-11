@@ -5,7 +5,7 @@
 \title{Make participants
 simulates an intervention and control group}
 \usage{
-make_participants(IP, CP)
+make_participants(IP = 2, CP = 3)
 }
 \arguments{
 \item{IP}{the number of intervention participants}

@@ -7,7 +7,7 @@
 #' @return density plots for a specific quarter with percentage indicator
 #' @export
 
-plot_samples <- function(samples, Grens, Effect){
+plot_samples <- function(samples, Grens = 0, Effect){
 
   columns <- c("b_DiD_9", "b_DiD_10", "b_DiD_11", "b_DiD_12")
   kwartaal <- c("Kwartaal 9", "Kwartaal 10", "Kwartaal 11", "Kwartaal 12")
@@ -22,7 +22,7 @@ plot_samples <- function(samples, Grens, Effect){
                                no = 0)) %>%
         group_by(Run) %>%
         summarise(Percentage1 = mean(GrensO)) %>%
-        ungroup() %>%
+        dplyr::ungroup() %>%
         mutate(Percentage = paste0(round(Percentage1 * 100, 0), " %"))
 
   # make plots

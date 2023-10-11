@@ -6,7 +6,7 @@
 this function runs a bayesian regression with
 Formula: "Verwijzingen ~ 0 + Intercept + id + Kwartaal + DiD_9 + DiD_10 + DiD_11 + DiD_12"}
 \usage{
-run_regressions(data, prior_type)
+run_regressions(data, prior_type = 1)
 }
 \arguments{
 \item{data}{dataframe with interventions}

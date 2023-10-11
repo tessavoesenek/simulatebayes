@@ -8,4 +8,12 @@
 \description{
 This packages simulates data and runs bayesian regression for an financing experiment among GP's. The package simulates data on GP's that refer patients to hospitals. The referrals are simulated for 12 quarters. The intervention is a new way of financing and from quarter 9 up until quarter 12.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/tessavoesenek/simulatebayes}
+  \item Report bugs at \url{https://github.com/tessavoesenek/simulatebayes/issues}
+}
+
+}
 \keyword{internal}

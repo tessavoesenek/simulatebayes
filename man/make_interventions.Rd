@@ -4,7 +4,12 @@
 \alias{make_interventions}
 \title{Make interventions}
 \usage{
-make_interventions(data, Effect, Kwartaaleffect, Runs)
+make_interventions(
+  data = participants,
+  Effect = -0.04,
+  Kwartaaleffect = -0.01,
+  Runs = 20
+)
 }
 \arguments{
 \item{data}{a dataframe with colnames id, Interventie and K1}

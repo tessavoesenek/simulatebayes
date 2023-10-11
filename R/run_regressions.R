@@ -8,7 +8,7 @@
 #' @return list containing fixed effect coefficients and samples
 #' @export
 
-run_regressions <- function(data, prior_type){
+run_regressions <- function(data, prior_type = 1){
 
   Formula <- "Verwijzingen ~ 0 + Intercept + id + Kwartaal + DiD_9 + DiD_10 + DiD_11 + DiD_12"
   Runs <- max(as.numeric(data$Run))
@@ -55,7 +55,7 @@ run_regressions <- function(data, prior_type){
     # get posterior draws
 
     samples_temp <- tibble::tibble(brms::as_draws_df(reg1)) %>%
-      dplyr::mutate(Run = as.factor(i))
+      mutate(Run = as.factor(i))
 
     samples <- samples %>%
       rbind(samples_temp)
@@ -64,22 +64,22 @@ run_regressions <- function(data, prior_type){
 
     Estimates <- as.data.frame(brms::fixef(reg1)[,"Estimate"]) %>%
       tibble::rownames_to_column() %>%
-      dplyr::mutate(Run = as.factor(i))
+      mutate(Run = as.factor(i))
 
     Q2.5 <- as.data.frame(brms::fixef(reg1)[,"Q2.5"]) %>%
       tibble::rownames_to_column() %>%
-      dplyr::mutate(Run = as.factor(i))
+      mutate(Run = as.factor(i))
 
     Q97.5 <- as.data.frame(brms::fixef(reg1)[,"Q97.5"]) %>%
       tibble::rownames_to_column() %>%
-      dplyr::mutate(Run = as.factor(i))
+      mutate(Run = as.factor(i))
 
     coefficients_temp <- dplyr::left_join(Estimates, Q2.5, by = c("rowname", "Run")) %>%
       dplyr::left_join(Q97.5, by = c("rowname", "Run")) %>%
       dplyr::rename("Estimate" = "brms::fixef(reg1)[, \"Estimate\"]") %>%
       dplyr::rename("Q2.5" = "brms::fixef(reg1)[, \"Q2.5\"]") %>%
       dplyr::rename("Q97.5" = "brms::fixef(reg1)[, \"Q97.5\"]") %>%
-      dplyr::mutate(Kwartaal = as.numeric(stringr::str_sub(rowname, start = 9)))
+      mutate(Kwartaal = as.numeric(stringr::str_sub(rowname, start = 9)))
 
     coefficients <- coefficients %>%
       rbind(coefficients_temp) %>%

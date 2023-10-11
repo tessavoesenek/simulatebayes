@@ -14,13 +14,13 @@ compare_priors <- function(coefficients_priortype_1, coefficients_priortype_0, E
   RR <- coefficients_priortype_1 %>%
     group_by(Kwartaal) %>%
     summarise(ME = mean(Estimate), ML = mean(Q2.5), MU = mean(Q97.5)) %>%
-    ungroup() %>%
+    dplyr::ungroup() %>%
     mutate(Prior = "non informative")
 
   RR2 <- coefficients_priortype_0 %>%
     group_by(Kwartaal) %>%
     summarise(ME = mean(Estimate), ML = mean(Q2.5), MU = mean(Q97.5)) %>%
-    ungroup() %>%
+    dplyr::ungroup() %>%
     mutate(Prior = "informative")
 
   RR3 <- rbind(RR, RR2) %>%
