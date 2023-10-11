@@ -29,9 +29,15 @@ This is a basic example which shows you how to set an experiment:
 ``` r
 library(simulatebayes)
 
-participants <- make_participants(3,4)
-intervention_output <- make_interventions(participants, -0.1, -0.04, 2)
-regression_output <- run_regressions(intervention_output$interventions, prior_type = 1) 
-sample_plots <- plot_samples(regression_output$samples, 0, intervention_output$Effect)
+participants <- make_participants()
+intervention_output <- make_interventions()
+
+prior1_reg_out <- run_regressions(intervention_output$interventions, prior_type = 1)
+prior0_reg_out <- run_regressions(intervention_output$interventions, prior_type = 0)
+
+samples_plot_prior1 <- plot_samples(prior1_reg_out$samples, Effect = intervention_output$Effect)
+samples_plot_prior0 <- plot_samples(prior0_reg_out$samples, Effect = intervention_output$Effect)
+
+compare_prior_plot <- compare_priors(prior1_reg_out$coefficients, prior0_reg_out$coefficients, intervention_output$Effect)
 ```
 
