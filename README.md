@@ -19,7 +19,7 @@ Finally, you can plot the samples from the posterior with plot_samples. If you m
 You can install the development version of simulatebayes like so:
 
 ``` r
-devtools::install_github("tessavoesenek/simulatebayes", build_vignettes = TRU
+devtools::install_github("tessavoesenek/simulatebayes", build_vignettes = TRUE)
 ```
 
 ## Example
